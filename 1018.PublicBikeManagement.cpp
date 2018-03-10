@@ -62,7 +62,7 @@ void DFS(int begin, int end, int perfect, int dist)
 			pre[i]=begin;
 			int lastsend = cursend;
 			int lastback = curback;
-			//计算到达当前点的send和back数?
+			//录脝脣茫碌陆麓茂碌卤脟掳碌茫碌脛send潞脥back脢媒?
 			if(bikes[i] + curback< perfect) {//bikes[i]<perfect
 				cursend += perfect - bikes[i] - curback;
 				curback = 0;
