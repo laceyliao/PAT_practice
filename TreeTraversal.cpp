@@ -1,14 +1,6 @@
 /*
 1020. Tree Traversals (25)
-时间限制 
-400 ms
-内存限制 
-65536 kB
-代码长度限制 
-16000 B
-判题程序 
-Standard 
-作者 
+
 CHEN, Yue
 Suppose that all the keys in a binary tree are distinct positive integers. Given the postorder and 
 inorder traversal sequences, you are supposed to output the level order traversal sequence of the 
