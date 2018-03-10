@@ -1,14 +1,6 @@
 /*
 1102. Invert a Binary Tree (25)
-时间限制 
-400 ms
-内存限制 
-65536 kB
-代码长度限制 
-16000 B
-判题程序 
-Standard 
-作者 
+
 CHEN, Yue
 The following is from Max Howell @twitter:
 Google: 90% of our engineers use the software you wrote (Homebrew), but you can't invert a binary tree on a whiteboard so fuck off.
