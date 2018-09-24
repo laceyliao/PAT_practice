@@ -1,77 +1,47 @@
-#include<iostream>
-#include<string>
-#include<vector>
-#include<algorithm>
+#include <algorithm>
+#include <cstring>
+#include <cstdio>
+ 
 using namespace std;
-
-const int INF=99999;
-
-struct student{
-	string id;
-	int score,location,final_rank,local_rank;
-	student() {}
-	student(string a,int b,int c){
-		id=a;
-		score=b;
-		location=c;
-	}
-	bool operator > (const student& s) const
-	{
-		if(score!=s.score)
-			return score>s.score;
-		else return id<s.id;
-	}
+ 
+struct node {
+char id[15];
+int score;
+int location;
+int local_rank;
+int final_rank;
 };
-
-vector<student> V;
-
-int main()
-{
-	int N,K,score;
-	string id;
-	int grade = INF;
-	int rank=0;
-	cin>>N;
-	for(int i=0;i<N;i++)
-	{
-		cin>>K;
-		vector<student> tmp;
-		for(int j=0;j<K;j++)
-		{
-			cin>>id>>score;
-			tmp.push_back(student(id,score,i+1));
-		}
-		sort(tmp.begin(), tmp.end(),greater<student>() );
-
-		for(int j=0;j<K;j++)
-		{
-			if(tmp[j].score == grade)
-			{
-				tmp[j].local_rank = rank;
-			}
-			else
-			{
-				rank = j+1;
-				tmp[j].local_rank = rank;
-				grade = tmp[j].score;
-			}
-			V.push_back(tmp[j]);
-		}
-	}
-	sort(V.begin(),V.end(),greater<student>());
-	grade = INF;
-	rank = 0;
-	cout<<V.size()<<endl;
-	for(int i=0;i<V.size();i++)
-	{
-		if(V[i].score == grade)
-			V[i].final_rank = rank;
-		else {
-			rank = i+1;
-			V[i].final_rank = rank;
-			grade = V[i].score;
-		}
-		cout<<V[i].id<<" "<<V[i].final_rank<<" "<<V[i].location<<" "<<V[i].local_rank<<endl;
-	}
-	return 0;
+ 
+node a[30010];
+ 
+bool cmp1(const node &a,const node &b) {
+    return a.score > b.score;
+}
+ 
+bool cmp2(const node &a,const node &b) {
+    return cmp1(a, b) || ((a.score == b.score) && (strcmp(a.id, b.id) < 0));
+}
+ 
+int main() {
+int m, n = 0;
+    scanf("%d",&m);
+    for (int i = 1; i <= m; ++i) {
+        int p;
+        scanf("%d",&p);
+        for (int j = 0; j < p; ++j) {
+            scanf("%s%d",a[n + j].id, &a[n + j].score);
+            a[n + j].location = i;
+        }
+        sort(a + n, a + n + p, cmp1);
+        for (int j = 0, r = 1; j < p; ++j) {
+            a[n + j].local_rank = (j && (a[n + j].score == a[n + j - 1].score))?r:(r = j + 1);
+        }
+        n += p;
+    }
+    sort(a, a + n, cmp2);
+    printf("%d\n",n);
+    for (int i = 0, r = 1; i < n; ++i) {
+        printf("%s %d %d %d\n",a[i].id, (i && (a[i].score == a[i - 1].score))?r:(r = i + 1), a[i].location, a[i].local_rank);
+    }
+    return 0;
 }
